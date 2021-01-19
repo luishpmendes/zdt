@@ -30,7 +30,19 @@ $(BIN)/test/NSGA2_Solver_Test : $(BIN)/solver/Solver.o \
 
 NSGA2_Solver_Test : clean $(BIN)/test/NSGA2_Solver_Test
 
+$(BIN)/exec/NSGA2_Solver_Exec : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/nsga2/NSGA2_Solver.o \
+                                $(BIN)/utils/ArgumentParser.o \
+                                $(BIN)/exec/NSGA2_Solver_Exec.o 
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+NSGA2_Solver_Exec : clean $(BIN)/exec/NSGA2_Solver_Exec
+
 tests: NSGA2_Solver_Test
 
-all: tests
+execs: NSGA2_Solver_Exec
+
+all: tests execs
 
