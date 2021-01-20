@@ -52,10 +52,21 @@ $(BIN)/test/NSPSO_Solver_Test : $(BIN)/solver/Solver.o \
 
 NSPSO_Solver_Test : clean $(BIN)/test/NSPSO_Solver_Test
 
+$(BIN)/exec/NSPSO_Solver_Exec : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/nspso/NSPSO_Solver.o \
+                                $(BIN)/utils/ArgumentParser.o \
+                                $(BIN)/exec/NSPSO_Solver_Exec.o 
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+NSPSO_Solver_Exec : clean $(BIN)/exec/NSPSO_Solver_Exec
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test
 
-execs: NSGA2_Solver_Exec
+execs: NSGA2_Solver_Exec \
+       NSPSO_Solver_Exec
 
 all: tests execs
 
