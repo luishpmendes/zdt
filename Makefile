@@ -40,7 +40,20 @@ $(BIN)/exec/NSGA2_Solver_Exec : $(BIN)/solver/Solver.o \
 
 NSGA2_Solver_Exec : clean $(BIN)/exec/NSGA2_Solver_Exec
 
-tests: NSGA2_Solver_Test
+$(BIN)/test/NSPSO_Solver_Test : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/nspso/NSPSO_Solver.o \
+                                $(BIN)/test/NSPSO_Solver_Test.o 
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+	@echo "--> Running test..."
+	$(BIN)/test/NSPSO_Solver_Test
+	@echo
+
+NSPSO_Solver_Test : clean $(BIN)/test/NSPSO_Solver_Test
+
+tests: NSGA2_Solver_Test \
+       NSPSO_Solver_Test
 
 execs: NSGA2_Solver_Exec
 
