@@ -106,10 +106,24 @@ $(BIN)/exec/MHACO_Solver_Exec : $(BIN)/solver/Solver.o \
 
 MHACO_Solver_Exec : clean $(BIN)/exec/MHACO_Solver_Exec
 
+$(BIN)/test/NSBRKGA_MP_IPR_Solver_Test : $(BIN)/solver/Solver.o \
+                                         $(BIN)/solver/nsbrkga_mp_ipr/Decoder.o \
+                                         $(BIN)/solver/nsbrkga_mp_ipr/NSBRKGA_MP_IPR_Solver.o \
+                                         $(BIN)/test/NSBRKGA_MP_IPR_Solver_Test.o 
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+	@echo "--> Running test..."
+	$(BIN)/test/NSBRKGA_MP_IPR_Solver_Test
+	@echo
+
+NSBRKGA_MP_IPR_Solver_Test : clean $(BIN)/test/NSBRKGA_MP_IPR_Solver_Test
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
-       MHACO_Solver_Test
+       MHACO_Solver_Test \
+       NSBRKGA_MP_IPR_Solver_Test
 
 execs: NSGA2_Solver_Exec \
        NSPSO_Solver_Exec \
