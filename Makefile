@@ -152,6 +152,14 @@ $(BIN)/exec/Optimal_Solver_Exec : $(BIN)/solver/Solver.o \
 
 Optimal_Solver_Exec : clean $(BIN)/exec/Optimal_Solver_Exec
 
+$(BIN)/exec/Hypervolume_Calculator_Exec : $(BIN)/utils/ArgumentParser.o \
+                                          $(BIN)/exec/Hypervolume_Calculator_Exec.o
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+Hypervolume_Calculator_Exec : clean $(BIN)/exec/Hypervolume_Calculator_Exec
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
@@ -164,7 +172,8 @@ execs: NSGA2_Solver_Exec \
        MOEAD_Solver_Exec \
        MHACO_Solver_Exec \
        NSBRKGA_MP_IPR_Solver_Exec \
-       Optimal_Solver_Exec
+       Optimal_Solver_Exec \
+       Hypervolume_Calculator_Exec
 
 all: tests execs
 
