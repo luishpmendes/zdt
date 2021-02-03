@@ -142,6 +142,16 @@ $(BIN)/test/Optimal_Solver_Test : $(BIN)/solver/Solver.o \
 
 Optimal_Solver_Test : clean $(BIN)/test/Optimal_Solver_Test
 
+$(BIN)/exec/Optimal_Solver_Exec : $(BIN)/solver/Solver.o \
+                                  $(BIN)/solver/optimal/Optimal_Solver.o \
+                                  $(BIN)/utils/ArgumentParser.o \
+                                  $(BIN)/exec/Optimal_Solver_Exec.o 
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+Optimal_Solver_Exec : clean $(BIN)/exec/Optimal_Solver_Exec
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
@@ -153,7 +163,8 @@ execs: NSGA2_Solver_Exec \
        NSPSO_Solver_Exec \
        MOEAD_Solver_Exec \
        MHACO_Solver_Exec \
-       NSBRKGA_MP_IPR_Solver_Exec
+       NSBRKGA_MP_IPR_Solver_Exec \
+       Optimal_Solver_Exec
 
 all: tests execs
 
