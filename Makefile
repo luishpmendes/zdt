@@ -130,11 +130,24 @@ $(BIN)/exec/NSBRKGA_MP_IPR_Solver_Exec : $(BIN)/solver/Solver.o \
 
 NSBRKGA_MP_IPR_Solver_Exec : clean $(BIN)/exec/NSBRKGA_MP_IPR_Solver_Exec
 
+$(BIN)/test/Optimal_Solver_Test : $(BIN)/solver/Solver.o \
+                                  $(BIN)/solver/optimal/Optimal_Solver.o \
+                                  $(BIN)/test/Optimal_Solver_Test.o 
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+	@echo "--> Running test..."
+	$(BIN)/test/Optimal_Solver_Test
+	@echo
+
+Optimal_Solver_Test : clean $(BIN)/test/Optimal_Solver_Test
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
        MHACO_Solver_Test \
-       NSBRKGA_MP_IPR_Solver_Test
+       NSBRKGA_MP_IPR_Solver_Test \
+       Optimal_Solver_Test
 
 execs: NSGA2_Solver_Exec \
        NSPSO_Solver_Exec \
