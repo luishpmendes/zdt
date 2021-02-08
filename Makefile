@@ -168,6 +168,15 @@ $(BIN)/exec/Delta_Calculator_Exec : $(BIN)/utils/ArgumentParser.o \
 
 Delta_Calculator_Exec : clean $(BIN)/exec/Delta_Calculator_Exec
 
+$(BIN)/exec/Convergence_Metric_Calculator_Exec : $(BIN)/utils/ArgumentParser.o \
+                                                 $(BIN)/exec/Convergence_Metric_Calculator_Exec.o
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+Convergence_Metric_Calculator_Exec : clean $(BIN)/exec/Convergence_Metric_Calculator_Exec
+
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
@@ -182,7 +191,8 @@ execs: NSGA2_Solver_Exec \
        NSBRKGA_MP_IPR_Solver_Exec \
        Optimal_Solver_Exec \
        Hypervolume_Calculator_Exec \
-       Delta_Calculator_Exec
+       Delta_Calculator_Exec \
+       Convergence_Metric_Calculator_Exec
 
 all: tests execs
 
