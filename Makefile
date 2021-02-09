@@ -176,6 +176,14 @@ $(BIN)/exec/Convergence_Metric_Calculator_Exec : $(BIN)/utils/ArgumentParser.o \
 
 Convergence_Metric_Calculator_Exec : clean $(BIN)/exec/Convergence_Metric_Calculator_Exec
 
+$(BIN)/exec/Cardinality_Calculator_Exec : $(BIN)/utils/ArgumentParser.o \
+                                          $(BIN)/exec/Cardinality_Calculator_Exec.o
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+Cardinality_Calculator_Exec : clean $(BIN)/exec/Cardinality_Calculator_Exec
+
 
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
@@ -192,7 +200,8 @@ execs: NSGA2_Solver_Exec \
        Optimal_Solver_Exec \
        Hypervolume_Calculator_Exec \
        Delta_Calculator_Exec \
-       Convergence_Metric_Calculator_Exec
+       Convergence_Metric_Calculator_Exec \
+       Cardinality_Calculator_Exec
 
 all: tests execs
 
