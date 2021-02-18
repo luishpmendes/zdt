@@ -74,12 +74,23 @@ $(BIN)/test/MOEAD_Solver_Test : $(BIN)/solver/Solver.o \
 
 MOEAD_Solver_Test : clean $(BIN)/test/MOEAD_Solver_Test
 
+$(BIN)/exec/MOEAD_Solver_Exec : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/moead/MOEAD_Solver.o \
+                                $(BIN)/utils/ArgumentParser.o \
+                                $(BIN)/exec/MOEAD_Solver_Exec.o 
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+MOEAD_Solver_Exec : clean $(BIN)/exec/MOEAD_Solver_Exec
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test
 
 execs: NSGA2_Solver_Exec \
-       NSPSO_Solver_Exec
+       NSPSO_Solver_Exec \
+       MOEAD_Solver_Exec
 
 all: tests execs
 
