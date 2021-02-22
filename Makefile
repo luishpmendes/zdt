@@ -84,9 +84,22 @@ $(BIN)/exec/MOEAD_Solver_Exec : $(BIN)/solver/Solver.o \
 
 MOEAD_Solver_Exec : clean $(BIN)/exec/MOEAD_Solver_Exec
 
+$(BIN)/test/MHACO_Solver_Test : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/mhaco/MHACO_Solver.o \
+                                $(BIN)/test/MHACO_Solver_Test.o 
+	@echo "--> Linking objects..." 
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+	@echo "--> Running test..."
+	$(BIN)/test/MHACO_Solver_Test
+	@echo
+
+MHACO_Solver_Test : clean $(BIN)/test/MHACO_Solver_Test
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
-       MOEAD_Solver_Test
+       MOEAD_Solver_Test \
+       MHACO_Solver_Test
 
 execs: NSGA2_Solver_Exec \
        NSPSO_Solver_Exec \
