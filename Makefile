@@ -96,6 +96,16 @@ $(BIN)/test/MHACO_Solver_Test : $(BIN)/solver/Solver.o \
 
 MHACO_Solver_Test : clean $(BIN)/test/MHACO_Solver_Test
 
+$(BIN)/exec/MHACO_Solver_Exec : $(BIN)/solver/Solver.o \
+                                $(BIN)/solver/mhaco/MHACO_Solver.o \
+                                $(BIN)/utils/ArgumentParser.o \
+                                $(BIN)/exec/MHACO_Solver_Exec.o 
+	@echo "--> Linking objects..."
+	$(CPP) -o $@ $^ $(CARGS) $(PAGMOINC)
+	@echo
+
+MHACO_Solver_Exec : clean $(BIN)/exec/MHACO_Solver_Exec
+
 tests: NSGA2_Solver_Test \
        NSPSO_Solver_Test \
        MOEAD_Solver_Test \
@@ -103,7 +113,8 @@ tests: NSGA2_Solver_Test \
 
 execs: NSGA2_Solver_Exec \
        NSPSO_Solver_Exec \
-       MOEAD_Solver_Exec
+       MOEAD_Solver_Exec \
+       MHACO_Solver_Exec
 
 all: tests execs
 
