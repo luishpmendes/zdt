@@ -8,7 +8,7 @@ double multiplicative_epsilon_indicator(
         const std::vector<BRKGA::Sense> & senses,
         const std::vector<std::vector<double>> & reference_front,
         const std::vector<std::vector<double>> & front) {
-    double epsilon = 0.0, min_max_ratio, max_ratio, ratio;
+    double epsilon = 0.0, min_max_ratio = 0.0, max_ratio, ratio;
 
     for(unsigned i = 0; i < front.size(); i++) {
         for(unsigned j = 0; j < reference_front.size(); j++) {
