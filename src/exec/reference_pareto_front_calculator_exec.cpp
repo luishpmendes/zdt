@@ -6,11 +6,25 @@
 int main(int argc, char * argv[]) {
     Argument_Parser arg_parser(argc, argv);
     std::ifstream ifs;
-    unsigned num_objectives = 2, num_solvers;
+    unsigned num_objectives = 2, num_solvers, max_num_solutions = 500, 
+        seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::vector<std::pair<std::vector<double>, std::vector<double>>>
             reference_pareto,
             pareto,
             best_solutions_snapshot;
+    std::mt19937 rng;
+
+    if(arg_parser.option_exists("--max-num-solutions")) {
+        max_num_solutions =
+            std::stoul(arg_parser.option_value("--max-num-solutions"));
+    }
+
+    if(arg_parser.option_exists("--seed")) {
+        seed = std::stoul(arg_parser.option_value("--seed"));
+    }
+
+    rng.seed(seed);
+    rng.discard(10000);
 
     for(num_solvers = 0;
         arg_parser.option_exists("--pareto-" +
@@ -39,7 +53,9 @@ int main(int argc, char * argv[]) {
 
                 zdt::Solver::update_best_individuals(reference_pareto,
                                                      pareto,
-                                                     zdt::Solver::senses);
+                                                     zdt::Solver::senses,
+                                                     max_num_solutions,
+                                                     rng);
 
                 ifs.close();
             } else {
@@ -86,7 +102,9 @@ int main(int argc, char * argv[]) {
                     zdt::Solver::update_best_individuals(
                         reference_pareto,
                         best_solutions_snapshot,
-                        zdt::Solver::senses);
+                        zdt::Solver::senses,
+                        max_num_solutions,
+                        rng);
 
                     ifs.close();
                 } else {

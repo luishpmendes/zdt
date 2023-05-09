@@ -11,6 +11,7 @@ time_limit=600
 population_size=100
 max_num_solutions=250
 max_num_snapshots=60
+max_ref_solutions=500
 
 path=$(dirname $(realpath $0))
 
@@ -117,7 +118,7 @@ i=0
 
 for zdt in ${zdts[@]}
 do
-    command="${path}/bin/exec/reference_pareto_front_calculator_exec "
+    command="${path}/bin/exec/reference_pareto_front_calculator_exec --max-num-solutions ${max_ref_solutions}"
     j=0;
     for solver in ${solvers[@]}
     do

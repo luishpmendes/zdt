@@ -121,23 +121,35 @@ bool Solver::update_best_individuals(
 }
 
 bool Solver::update_best_individuals(
+            std::vector<std::pair<std::vector<double>, std::vector<double>>> & best_individuals,
             const std::vector<
-                std::pair<std::vector<double>,
-                          std::vector<double>>> & new_individuals) {
-    bool result = Solver::update_best_individuals(
-            this->best_individuals,
-            new_individuals,
-            Solver::senses);
+                std::pair<std::vector<double>, std::vector<double>>> & new_individuals,
+            const std::vector<BRKGA::Sense> & senses,
+            unsigned max_num_solutions,
+            std::mt19937 & rng) {
+    bool result = Solver::update_best_individuals(best_individuals,
+                                                  new_individuals,
+                                                  Solver::senses);
 
-    if(this->best_individuals.size() > this->max_num_solutions) {
-        BRKGA::Population::crowdingSort<std::vector<double>>(
-                this->best_individuals,
-                this->rng);
-        this->best_individuals.resize(this->max_num_solutions);
+    if(best_individuals.size() > max_num_solutions) {
+        BRKGA::Population::crowdingSort<std::vector<double>>(best_individuals,
+                                                             rng);
+        best_individuals.resize(max_num_solutions);
         result = true;
     }
 
     return result;
+}
+
+bool Solver::update_best_individuals(
+            const std::vector<
+                std::pair<std::vector<double>,
+                          std::vector<double>>> & new_individuals) {
+    return Solver::update_best_individuals(this->best_individuals,
+                                           new_individuals,
+                                           Solver::senses,
+                                           this->max_num_solutions,
+                                           this->rng);
 }
 
 bool Solver::update_best_individuals(const pagmo::population & pop) {
