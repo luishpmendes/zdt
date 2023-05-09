@@ -120,7 +120,7 @@ int main(int argc, char * argv[]) {
                             for(unsigned j = 0; j < num_objectives; j++) {
                                 iss >> value[j];
 
-                                if(reference_point[j] > value[j]) {
+                                if(reference_point[j] < value[j]) {
                                     reference_point[j] = value[j];
                                 }
                             }
@@ -162,7 +162,7 @@ int main(int argc, char * argv[]) {
                             for(unsigned j = 0; j < num_objectives; j++) {
                                 iss >> value[j];
 
-                                if(reference_point[j] > value[j]) {
+                                if(reference_point[j] < value[j]) {
                                     reference_point[j] = value[j];
                                 }
                             }
