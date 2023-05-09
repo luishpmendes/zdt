@@ -1,0 +1,21 @@
+ZDT: 3
+Number of variables: 30
+Seed: 563230624
+Time limit: 600
+Iterations limit: 4294967295
+Maximum number of solutions: 250
+Maximum number of snapshots: 60
+Population size: 100
+Number of iterations: 870442
+Solutions obtained: 245
+Solving time: 600
+Number of snapshots: 61
+Time between snapshots: 10
+Time when the last snapshot was taken: 600
+Number of iterations between the snapshots: 71582788
+Iteration when the last snapshot was taken: 870442
+Probability of choosing from memory: 0.85
+Minimum pitch adjustment rate: 0.35
+Maximum pitch adjustment rate: 0.99
+Minimum distance bandwidth: 1e-05
+Maximum distance bandwidth: 1

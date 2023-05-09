@@ -1,0 +1,23 @@
+ZDT: 1
+Number of variables: 30
+Seed: 147607335
+Time limit: 600
+Iterations limit: 4294967295
+Maximum number of solutions: 250
+Maximum number of snapshots: 60
+Population size: 100
+Number of iterations: 180075
+Solutions obtained: 250
+Solving time: 600.003
+Number of snapshots: 61
+Time between snapshots: 10
+Time when the last snapshot was taken: 600.002
+Number of iterations between the snapshots: 71582788
+Iteration when the last snapshot was taken: 180075
+Number of solutions stored in the solution archive: 63
+Convergence speed: 1
+Threshold: 1
+nGenMark: 7
+EvalStop: 0
+Focus: 0
+Memory: 1
