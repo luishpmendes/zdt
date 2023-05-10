@@ -19,7 +19,8 @@ int main(int argc, char * argv[]) {
             num_objectives, std::numeric_limits<double>::lowest());
         pagmo::hypervolume hv;
 
-        ifs.open(arg_parser.option_value("--reference-pareto"));
+        std::string reference_pareto_filename = arg_parser.option_value("--reference-pareto");
+        ifs.open(reference_pareto_filename);
 
         if(ifs.is_open()) {
             for(std::string line; std::getline(ifs, line);) {
@@ -39,9 +40,8 @@ int main(int argc, char * argv[]) {
 
             ifs.close();
         } else {
-            throw std::runtime_error("File " +
-                    arg_parser.option_value("--reference-pareto") +
-                    " not found.");
+            throw std::runtime_error(
+                "File " + reference_pareto_filename + " not found.");
         }
 
         for(num_solvers = 0;
@@ -49,9 +49,9 @@ int main(int argc, char * argv[]) {
                                         std::to_string(num_solvers)) ||
             arg_parser.option_exists("--best-solutions-snapshots-" +
                                         std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--hypervolume-" +
+            arg_parser.option_exists("--hypervolume-ratio-" +
                                         std::to_string(num_solvers)) ||
-            arg_parser.option_exists("--hypervolume-snapshots-" +
+            arg_parser.option_exists("--hypervolume-ratio-snapshots-" +
                                         std::to_string(num_solvers));
             num_solvers++) {}
         
@@ -62,8 +62,9 @@ int main(int argc, char * argv[]) {
 
         for(unsigned i = 0; i < num_solvers; i++) {
             if(arg_parser.option_exists("--pareto-" + std::to_string(i))) {
-                ifs.open(arg_parser.option_value("--pareto-" +
-                                                 std::to_string(i)));
+                std::string pareto_filename =
+                    arg_parser.option_value("--pareto-" + std::to_string(i));
+                ifs.open(pareto_filename);
 
                 if(ifs.is_open()) {
                     for(std::string line; std::getline(ifs, line);) {
@@ -83,9 +84,8 @@ int main(int argc, char * argv[]) {
 
                     ifs.close();
                 } else {
-                    throw std::runtime_error("File " +
-                            arg_parser.option_value("--pareto-" +
-                                std::to_string(i)) + " not found.");
+                    throw std::runtime_error(
+                        "File " + pareto_filename + " not found.");
                 }
             }
         }
@@ -180,12 +180,14 @@ int main(int argc, char * argv[]) {
         reference_hypervolume = hv.compute(reference_point);
 
         for(unsigned i = 0; i < num_solvers; i++) {
-            ofs.open(arg_parser.option_value("--hypervolume-ratio-" +
-                                            std::to_string(i)));
+            std::string hypervolume_ratio_filename =
+                arg_parser.option_value("--hypervolume-ratio-" +
+                                        std::to_string(i));
+            ofs.open(hypervolume_ratio_filename);
             
             if(ofs.is_open()) {
                 hv = pagmo::hypervolume(paretos[i]);
-                
+
                 double hypervolume = hv.compute(reference_point);
                 assert(hypervolume >= 0.0);
                 assert(hypervolume <= reference_hypervolume);
@@ -198,8 +200,8 @@ int main(int argc, char * argv[]) {
 
                 if(ofs.eof() || ofs.fail() || ofs.bad()) {
                     throw std::runtime_error(
-                        "Error writing file " + arg_parser.option_value(
-                            "--hypervolume-ratio-" + std::to_string(i)) + ".");
+                        "Error writing file " +
+                        hypervolume_ratio_filename + ".");
                 }
 
                 ofs.close();
@@ -211,8 +213,10 @@ int main(int argc, char * argv[]) {
         }
 
         for(unsigned i = 0; i < num_solvers; i++) {
-            ofs.open(arg_parser.option_value("--hypervolume-ratio-snapshots-" +
-                                            std::to_string(i)));
+            std::string hypervolume_ratio_snapshots_filename =
+                arg_parser.option_value("--hypervolume-ratio-snapshots-" +
+                                        std::to_string(i));
+            ofs.open(hypervolume_ratio_snapshots_filename);
 
             if(ofs.is_open()) {
                 for(unsigned j = 0;
@@ -235,11 +239,12 @@ int main(int argc, char * argv[]) {
                     
                     if(ofs.eof() || ofs.fail() || ofs.bad()) {
                         throw std::runtime_error(
-                            "Error writing file " + arg_parser.option_value(
-                                "--hypervolume-ratio-snapshots-" +
-                                std::to_string(i)) + ".");
+                            "Error writing file " +
+                            hypervolume_ratio_snapshots_filename + ".");
                     }
                 }
+
+                ofs.close();
             } else {
                 throw std::runtime_error(
                     "File " + arg_parser.option_value(
@@ -253,8 +258,8 @@ int main(int argc, char * argv[]) {
                   << "--pareto-i <pareto_filename> "
                   << "--best-solutions-snapshots-i <best_solutions_snapshots_filename> "
                   << "--populations-snapshots-i <populations_snapshots_filename> "
-                  << "--hypervolume-i <hypervolume_filename> "
-                  << "--hypervolume-snapshots-i <hypervolume_snapshots_filename> "
+                  << "--hypervolume-ratio-i <hypervolume_filename> "
+                  << "--hypervolume-ratio-snapshots-i <hypervolume_snapshots_filename> "
                   << std::endl;
     }
 
