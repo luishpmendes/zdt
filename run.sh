@@ -177,8 +177,8 @@ do
             command+="--pareto-${j} ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
             command+="--populations-snapshots-${j} ${path}/populations_snapshots/zdt${zdt}_${solver}_${seed}_ "
-            command+="--hypervolume-${j} ${path}/hypervolume/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--hypervolume-snapshots-${j} ${path}/hypervolume_snapshots/zdt${zdt}_${solver}_${seed}.txt "
+            command+="--hypervolume-ratio-${j} ${path}/hypervolume/zdt${zdt}_${solver}_${seed}.txt "
+            command+="--hypervolume-ratio-snapshots-${j} ${path}/hypervolume_snapshots/zdt${zdt}_${solver}_${seed}.txt "
             j=$((j+1))
         done
     done
