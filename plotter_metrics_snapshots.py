@@ -7,23 +7,25 @@ from plotter_definitions import *
 
 dirname = os.path.dirname(__file__)
 
-metrics_labels = ["Hypervolume Ratio", "Modified Inverted Generational Distance", "Multiplicative Epsilon Indicator"]
+# metrics_labels = ["Hypervolume Ratio", "Modified Inverted Generational Distance", "Multiplicative Epsilon Indicator"]
+metrics_labels = ["Hypervolume Ratio", "Modified Inverted Generational Distance"]
 
-metrics_per_snapshot = [[], [], []]
+# metrics_per_snapshot = [[], [], []]
+metrics_per_snapshot = [[], []]
 
 for i in range(num_snapshots + 1):
     metrics_per_snapshot[0].append([])
     metrics_per_snapshot[1].append([])
-    metrics_per_snapshot[2].append([])
+    # metrics_per_snapshot[2].append([])
     for solver in solvers:
         metrics_per_snapshot[0][i].append([])
         metrics_per_snapshot[1][i].append([])
-        metrics_per_snapshot[2][i].append([])
+        # metrics_per_snapshot[2][i].append([])
 
 for zdt in zdts:
     for i in range(len(solvers)):
         for seed in seeds:
-            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
@@ -36,7 +38,7 @@ for zdt in zdts:
 for zdt in zdts:
     for i in range(len(solvers)):
         for seed in seeds:
-            filename = os.path.join(dirname, "igd_plus_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "igd_plus_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
@@ -46,18 +48,18 @@ for zdt in zdts:
                         j += 1
                     csv_file.close()
 
-for zdt in zdts:
-    for i in range(len(solvers)):
-        for seed in seeds:
-            filename = os.path.join(dirname, "multiplicative_epsilon_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
-            if os.path.exists(filename):
-                with open(filename) as csv_file:
-                    data = csv.reader(csv_file, delimiter = ",")
-                    j = 0
-                    for row in data:
-                        metrics_per_snapshot[2][j][i].append(float(row[2]))
-                        j += 1
-                    csv_file.close()
+# for zdt in zdts:
+#     for i in range(len(solvers)):
+#         for seed in seeds:
+#             filename = os.path.join(dirname, "multiplicative_epsilon_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
+#             if os.path.exists(filename):
+#                 with open(filename) as csv_file:
+#                     data = csv.reader(csv_file, delimiter = ",")
+#                     j = 0
+#                     for row in data:
+#                         metrics_per_snapshot[2][j][i].append(float(row[2]))
+#                         j += 1
+#                     csv_file.close()
 
 for snapshot in range(num_snapshots + 1):
     fig, axs = plt.subplots(1, ncols = len(metrics_per_snapshot), figsize = (12.0 * len(metrics_per_snapshot), 12.0 * 1), squeeze = False, num = 1, clear = True)
