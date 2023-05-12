@@ -63,7 +63,7 @@ for zdt in zdts:
 
 for snapshot in range(num_snapshots + 1):
     fig, axs = plt.subplots(1, ncols = len(metrics_per_snapshot), figsize = (12.0 * len(metrics_per_snapshot), 12.0 * 1), squeeze = False, num = 1, clear = True)
-    fig.suptitle("Multi-Objective Travelling Salesman Problem", fontsize = 42)
+    fig.suptitle("ZDT", fontsize = 42)
     for j in range(len(metrics_per_snapshot)):
         axs[0][j].set_xlabel(xlabel = metrics_labels[j], fontsize = "xx-large")
         pt.half_violinplot(data = metrics_per_snapshot[j][snapshot], ax = axs[0][j], palette = colors, orient = "h", width = 0.6, cut = 0.0, inner = None)
@@ -78,7 +78,7 @@ for snapshot in range(num_snapshots + 1):
 for snapshot in range(num_snapshots + 1):
     fig, axs = plt.subplots(nrows = len(metrics_per_snapshot), ncols = len(metrics_per_snapshot), figsize = (8.0 * len(metrics_per_snapshot), 8.0 * len(metrics_per_snapshot)), squeeze = False, num = 1, clear = True)
     fig.set_size_inches(8.0 * len(metrics_per_snapshot), 8.0 * len(metrics_per_snapshot))
-    fig.suptitle("Multi-Objective Travelling Salesman Problem", fontsize = 36)
+    fig.suptitle("ZDT", fontsize = 36)
     for i in range(len(solvers)):
         for j in range(len(metrics_per_snapshot)):
             axs[j][j].set_xlabel(xlabel = metrics_labels[j], fontsize = "xx-large")

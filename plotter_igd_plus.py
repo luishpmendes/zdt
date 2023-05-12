@@ -13,7 +13,7 @@ min_igd_plus = 1.0
 max_igd_plus = 0.0
 for zdt in zdts:
     for solver in solvers:
-        filename = os.path.join(dirname, "igd_plus/zdt" + zdt + "_" + solver + ".txt")
+        filename = os.path.join(dirname, "igd_plus/zdt" + str(zdt) + "_" + solver + ".txt")
         with open(filename) as csv_file:
             data = csv.reader(csv_file)
             for row in data:
@@ -29,7 +29,7 @@ for zdt in zdts:
     plt.xlabel("Modified Inverted Generational Distance", fontsize = "x-large")
     xs = []
     for solver in solvers:
-        filename = os.path.join(dirname, "igd_plus/zdt" + zdt + "_" + solver + ".txt")
+        filename = os.path.join(dirname, "igd_plus/zdt" + str(zdt) + "_" + solver + ".txt")
         x = []
         with open(filename) as csv_file:
             data = csv.reader(csv_file)
@@ -40,7 +40,7 @@ for zdt in zdts:
     sns.stripplot(data = xs, palette = colors, orient = "h", size = 2, zorder = 0)
     sns.boxplot(data = xs, orient = "h", width = 0.20, color = "black", zorder = 10, showcaps = True, boxprops = {'facecolor' : 'none', "zorder" : 10}, showfliers = True, whiskerprops = {'linewidth' : 2, "zorder" : 10}, flierprops = {'markersize' : 2})
     plt.yticks(ticks = list(range(len(solvers))), labels = [solver_labels[solver] for solver in solvers], fontsize = "large")
-    filename = os.path.join(dirname, "igd_plus/zdt" + zdt + ".png")
+    filename = os.path.join(dirname, "igd_plus/zdt" + str(zdt) + ".png")
     plt.savefig(filename, format = "png")
     plt.close()
 
@@ -52,7 +52,7 @@ for solver in solvers:
 for zdt in zdts:
     for i in range(len(solvers)):
         for seed in seeds:
-            filename = os.path.join(dirname, "igd_plus/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "igd_plus/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
@@ -61,7 +61,7 @@ for zdt in zdts:
                     csv_file.close()
 
 plt.figure(figsize = (11, 11))
-plt.title("Multi-Objective Travelling Salesman Problem", fontsize = "xx-large")
+plt.title("ZDT", fontsize = "xx-large")
 plt.xlabel("Modified Inverted Generational Distance", fontsize = "x-large")
 pt.half_violinplot(data = igd_plus, palette = colors, orient = "h", width = 0.6, cut = 0.0, inner = None)
 sns.stripplot(data = igd_plus, palette = colors, orient = "h", size = 2, zorder = 0)

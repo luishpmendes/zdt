@@ -8,11 +8,11 @@ dirname = os.path.dirname(__file__)
 for zdt in zdts:
     for version in versions:
         plt.figure()
-        plt.title("zdt" + zdt, fontsize = "xx-large")
+        plt.title("zdt" + str(zdt), fontsize = "xx-large")
         plt.xlabel("Time (s)", fontsize = "x-large")
         plt.ylabel("Non-dominated Solutions", fontsize = "x-large")
         for i in range(len(solvers)):
-            filename = os.path.join(dirname, "num_non_dominated_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + version + ".txt")
+            filename = os.path.join(dirname, "num_non_dominated_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + version + ".txt")
             if os.path.exists(filename):
                 x = []
                 y = []
@@ -25,6 +25,6 @@ for zdt in zdts:
         plt.xlim(left = 0)
         plt.ylim(bottom = 0)
         plt.legend(loc = "best", fontsize = "large")
-        filename = os.path.join(dirname, "num_non_dominated_snapshots/zdt" + zdt + "_" + version + ".png")
+        filename = os.path.join(dirname, "num_non_dominated_snapshots/zdt" + str(zdt) + "_" + version + ".png")
         plt.savefig(filename, format = "png")
         plt.close()

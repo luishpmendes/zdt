@@ -15,7 +15,7 @@ max_time = 0.0
 for zdt in zdts:
     for solver in solvers:
         for seed in seeds:
-            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + zdt + "_" + solver + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + str(zdt) + "_" + solver + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
@@ -47,7 +47,7 @@ for i in range(num_snapshots + 1):
 for zdt in zdts:
     for i in range(len(solvers)):
         for seed in seeds:
-            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "hypervolume_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
@@ -108,7 +108,7 @@ plt.close()
 
 for snapshot in range(num_snapshots + 1):
     plt.figure(figsize = (11, 11))
-    plt.title("Multi-Objective Travelling Salesman Problem", fontsize = "xx-large")
+    plt.title("ZDT", fontsize = "xx-large")
     plt.xlabel("Hypervolume Ratio", fontsize = "x-large")
     pt.half_violinplot(data = hypervolume_per_snapshot[snapshot], palette = colors, orient = "h", width = 0.6, cut = 0.0, inner = None)
     sns.stripplot(data = hypervolume_per_snapshot[snapshot], palette = colors, orient = "h", size = 2, zorder = 0)

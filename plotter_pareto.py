@@ -14,7 +14,7 @@ for zdt in zdts:
             min_ys.append(-1)
             max_ys.append(-1)
         for solver in solvers:
-            filename = os.path.join(dirname, "pareto/zdt" + zdt + "_" + solver + "_" + version + ".txt")
+            filename = os.path.join(dirname, "pareto/zdt" + str(zdt) + "_" + solver + "_" + version + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter=" ")
@@ -31,9 +31,9 @@ for zdt in zdts:
             max_ys[i] = max_ys[i] + round(0.025 * delta_y)
         fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (5.0 * 2, 5.0 * 2), squeeze = False, num = 1, clear = True)
         fig.set_size_inches(5.0 * 2, 5.0 * 2)
-        fig.suptitle("zdt" + zdt, fontsize = "xx-large")
+        fig.suptitle("zdt" + str(zdt), fontsize = "xx-large")
         for i in range(len(solvers)):
-            filename = os.path.join(dirname, "pareto/zdt" + zdt + "_" + solvers[i] + "_" + version + ".txt")
+            filename = os.path.join(dirname, "pareto/zdt" + str(zdt) + "_" + solvers[i] + "_" + version + ".txt")
             if os.path.exists(filename):
                 ys = []
                 for j in range(2):
@@ -61,5 +61,5 @@ for zdt in zdts:
                             axs[j][l].legend(loc = "best", fontsize = "large")
                 del ys
         plt.subplots_adjust(wspace = 0.16 + 0.07 * 2, hspace = 0.16 + 0.07 * 2)
-        filename = os.path.join(dirname, "pareto/zdt" + zdt + "_" + version + ".png")
+        filename = os.path.join(dirname, "pareto/zdt" + str(zdt) + "_" + version + ".png")
         plt.savefig(filename, format = "png")

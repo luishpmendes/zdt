@@ -52,7 +52,7 @@ for zdt in zdts:
 #                     csv_file.close()
 
 fig, axs = plt.subplots(1, ncols = len(metrics), figsize = (12.0 * len(metrics), 12.0 * 1), squeeze = False, num = 1, clear = True)
-fig.suptitle("Multi-Objective Travelling Salesman Problem", fontsize = 42)
+fig.suptitle("ZDT", fontsize = 42)
 for j in range(len(metrics)):
     axs[0][j].set_xlabel(xlabel = metrics_labels[j], fontsize = "xx-large")
     pt.half_violinplot(data = metrics[j], ax = axs[0][j], palette = colors, orient = "h", width = 0.6, cut = 0.0, inner = None)
@@ -64,7 +64,7 @@ plt.savefig(filename, format = "png")
 
 fig, axs = plt.subplots(nrows = len(metrics), ncols = len(metrics), figsize = (8.0 * len(metrics), 8.0 * len(metrics)), squeeze = False, num = 1, clear = True)
 fig.set_size_inches(8.0 * len(metrics), 8.0 * len(metrics))
-fig.suptitle("Multi-Objective Travelling Salesman Problem", fontsize = 36)
+fig.suptitle("ZDT", fontsize = 36)
 for i in range(len(solvers)):
     for j in range(len(metrics)):
         axs[j][j].set_xlabel(xlabel = metrics_labels[j], fontsize = "xx-large")

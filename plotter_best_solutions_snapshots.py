@@ -16,7 +16,7 @@ for zdt in zdts:
         for solver in solvers:
             num_snapshots = 0
             while True:
-                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + zdt + "_" + solver + "_" + version + "_" + str(num_snapshots) +  ".txt")
+                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + str(zdt) + "_" + solver + "_" + version + "_" + str(num_snapshots) +  ".txt")
                 if not os.path.exists(filename):
                     break
                 with open(filename) as csv_file:
@@ -37,9 +37,9 @@ for zdt in zdts:
         for snapshot in range(num_snapshots):
             fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (5.0 * 2, 5.0 * 2), squeeze = False, num = 1, clear = True)
             fig.set_size_inches(5.0 * 2, 5.0 * 2)
-            fig.suptitle("zdt" + zdt, fontsize = "xx-large")
+            fig.suptitle("zdt" + str(zdt), fontsize = "xx-large")
             for i in range(len(solvers)):
-                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + version + "_" + str(snapshot) +  ".txt")
+                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + version + "_" + str(snapshot) +  ".txt")
                 if os.path.exists(filename):
                     ys = []
                     for j in range(2):
@@ -67,5 +67,5 @@ for zdt in zdts:
                                 axs[j][k].scatter(x = ys[k], y = ys[j], color = colors[i], label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), alpha = 0.80)
                                 axs[j][k].legend(loc = "best", fontsize = "large")
             plt.subplots_adjust(wspace = 0.15 + 0.05 * 2, hspace = 0.15 + 0.05 * 2)
-            filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + zdt + "_" + version + "_" + str(snapshot) + ".png")
+            filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + str(zdt) + "_" + version + "_" + str(snapshot) + ".png")
             plt.savefig(filename, format = "png")

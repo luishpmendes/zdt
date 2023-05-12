@@ -24,7 +24,7 @@ for zdt in zdts:
         for solver in solvers:
             num_snapshots = 0
             while True:
-                filename = os.path.join(dirname, "populations_snapshots/zdt" + zdt + "_" + solver + "_" + version + "_" + str(num_snapshots) + ".txt")
+                filename = os.path.join(dirname, "populations_snapshots/zdt" + str(zdt) + "_" + solver + "_" + version + "_" + str(num_snapshots) + ".txt")
                 if not os.path.exists(filename):
                     break
                 with open(filename) as csv_file:
@@ -51,7 +51,7 @@ for zdt in zdts:
                 col = i % num_cols
                 figs[row][col].suptitle(solver_labels[solvers[i]], fontsize = "x-large")
                 axs = figs[row][col].subplots(nrows = 2, ncols = 2)
-                filename = os.path.join(dirname, "populations_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + version + "_" + str(snapshot) + ".txt")
+                filename = os.path.join(dirname, "populations_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + version + "_" + str(snapshot) + ".txt")
                 if os.path.exists(filename):
                     ys = []
                     for j in range(2):
@@ -77,7 +77,7 @@ for zdt in zdts:
                                 axs[j][k].set_xlabel(xlabel = "$f_{" + str(k + 1) + "}$", fontsize = "large")
                                 axs[j][k].set_ylabel(ylabel = "$f_{" + str(j + 1) + "}$", fontsize = "large")
                                 axs[j][k].scatter(x = ys[k], y = ys[j], color = colors[i], marker = (i + 3, 2, 0), alpha = 0.50)
-                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + zdt + "_" + solvers[i] + "_" + version + "_" + str(snapshot) + ".txt")
+                filename = os.path.join(dirname, "best_solutions_snapshots/zdt" + str(zdt) + "_" + solvers[i] + "_" + version + "_" + str(snapshot) + ".txt")
                 if os.path.exists(filename):
                     ys = []
                     for j in range(2):
@@ -102,8 +102,8 @@ for zdt in zdts:
                                 axs[j][k].set_xlabel(xlabel = "$f_{" + str(k + 1) + "}$", fontsize = "large")
                                 axs[j][k].set_ylabel(ylabel = "$f_{" + str(j + 1) + "}$", fontsize = "large")
                                 axs[j][k].scatter(x = ys[k], y = ys[j], color = colors2[i], marker = (i + 3, 2, 0), alpha = 0.75)
-            fig.suptitle("zdt" + zdt, fontsize = "xx-large")
-            filename = os.path.join(dirname, "populations_snapshots/zdt" + zdt + "_" + version + "_" + str(snapshot) + ".png")
+            fig.suptitle("zdt" + str(zdt), fontsize = "xx-large")
+            filename = os.path.join(dirname, "populations_snapshots/zdt" + str(zdt) + "_" + version + "_" + str(snapshot) + ".png")
             plt.savefig(filename, format = "png")
             plt.close(fig)
             plt.cla()

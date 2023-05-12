@@ -61,7 +61,7 @@ for zdt in zdts:
                     csv_file.close()
 
 plt.figure(figsize = (11, 11))
-plt.title("Multi-Objective Travelling Salesman Problem", fontsize = "xx-large")
+plt.title("ZDT", fontsize = "xx-large")
 plt.xlabel("Multiplicative Epsilon Indicator", fontsize = "x-large")
 pt.half_violinplot(data = multiplicative_epsilon, palette = colors, orient = "h", width = 0.6, cut = 0.0, inner = None)
 sns.stripplot(data = multiplicative_epsilon, palette = colors, orient = "h", size = 2, zorder = 0)
