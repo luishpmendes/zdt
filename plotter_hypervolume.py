@@ -13,7 +13,7 @@ min_hypervolume = 1.0
 max_hypervolume = 0.0
 for zdt in zdts:
     for solver in solvers:
-        filename = os.path.join(dirname, "hypervolume/zdt" + zdt + "_" + solver + ".txt")
+        filename = os.path.join(dirname, "hypervolume/zdt" + str(zdt) + "_" + solver + ".txt")
         with open(filename) as csv_file:
             data = csv.reader(csv_file)
             for row in data:
@@ -25,11 +25,11 @@ max_hypervolume = min(max_hypervolume + round(0.025 * delta_hypervolume), 1.00)
 
 for zdt in zdts:
     plt.figure(figsize = (11, 11))
-    plt.title("zdt"+zdt, fontsize = "xx-large")
+    plt.title("zdt" + str(zdt), fontsize = "xx-large")
     plt.xlabel("Hypervolume Ratio", fontsize = "x-large")
     xs = []
     for solver in solvers:
-        filename = os.path.join(dirname, "hypervolume/zdt" + zdt + "_" + solver + ".txt")
+        filename = os.path.join(dirname, "hypervolume/zdt" + str(zdt) + "_" + solver + ".txt")
         x = []
         with open(filename) as csv_file:
             data = csv.reader(csv_file)
@@ -40,7 +40,7 @@ for zdt in zdts:
     sns.stripplot(data = xs, palette = colors, orient = "h", size = 2, zorder = 0)
     sns.boxplot(data = xs, orient = "h", width = 0.20, color = "black", zorder = 10, showcaps = True, boxprops = {'facecolor' : 'none', "zorder" : 10}, showfliers = True, whiskerprops = {'linewidth' : 2, "zorder" : 10}, flierprops = {'markersize' : 2})
     plt.yticks(ticks = list(range(len(solvers))), labels = [solver_labels[solver] for solver in solvers], fontsize = "large")
-    filename = os.path.join(dirname, "hypervolume/zdt" + zdt + ".png")
+    filename = os.path.join(dirname, "hypervolume/zdt" + str(zdt) + ".png")
     plt.savefig(filename, format = "png")
     plt.close()
 
@@ -52,7 +52,7 @@ for solver in solvers:
 for zdt in zdts:
     for i in range(len(solvers)):
         for seed in seeds:
-            filename = os.path.join(dirname, "hypervolume/zdt" + zdt + "_" + solvers[i] + "_" + str(seed) + ".txt")
+            filename = os.path.join(dirname, "hypervolume/zdt" + str(zdt) + "_" + solvers[i] + "_" + str(seed) + ".txt")
             if os.path.exists(filename):
                 with open(filename) as csv_file:
                     data = csv.reader(csv_file, delimiter = ",")
