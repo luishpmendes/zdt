@@ -327,9 +327,9 @@ do
         command+="--hypervolumes ${path}/hypervolume/zdt${zdt}_${solver}.txt "
         command+="--hypervolume-statistics ${path}/hypervolume/zdt${zdt}_${solver}_stats.txt "
         command+="--igd-pluses ${path}/igd_plus/zdt${zdt}_${solver}.txt "
-        command+="--igd-pluses-statistics ${path}/igd_plus/zdt${zdt}_${solver}_stats.txt "
-        command+="--multiplicative-epsilons ${path}/multiplicative_epsilon/zdt${zdt}_${solver}.txt "
-        command+="--multiplicative-epsilons-statistics ${path}/multiplicative_epsilon/zdt${zdt}_${solver}_stats.txt "
+        command+="--igd-plus-statistics ${path}/igd_plus/zdt${zdt}_${solver}_stats.txt "
+        # command+="--multiplicative-epsilons ${path}/multiplicative_epsilon/zdt${zdt}_${solver}.txt "
+        # command+="--multiplicative-epsilon-statistics ${path}/multiplicative_epsilon/zdt${zdt}_${solver}_stats.txt "
         command+="--statistics-best ${path}/statistics/zdt${zdt}_${solver}_best.txt "
         command+="--statistics-median ${path}/statistics/zdt${zdt}_${solver}_median.txt "
         command+="--pareto-best ${path}/pareto/zdt${zdt}_${solver}_best.txt "
@@ -401,8 +401,8 @@ python3 ${path}/plotter_hypervolume.py &
 python3 ${path}/plotter_hypervolume_snapshots.py &
 python3 ${path}/plotter_igd_plus.py &
 python3 ${path}/plotter_igd_plus_snapshots.py &
-python3 ${path}/plotter_multiplicative_epsilon.py &
-python3 ${path}/plotter_multiplicative_epsilon_snapshots.py &
+# python3 ${path}/plotter_multiplicative_epsilon.py &
+# python3 ${path}/plotter_multiplicative_epsilon_snapshots.py &
 python3 ${path}/plotter_num_non_dominated_snapshots.py &
 python3 ${path}/plotter_num_fronts_snapshots.py &
 python3 ${path}/plotter_num_elites_snapshots.py &
