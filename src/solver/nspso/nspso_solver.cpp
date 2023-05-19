@@ -25,6 +25,13 @@ void NSPSO_Solver::solve() {
                                        this->memory,
                                        this->seed)};
 
+    if(this->max_num_snapshots > 0) {
+        this->time_between_snapshots = this->time_limit /
+            this->max_num_snapshots;
+        this->iterations_between_snapshots = this->iterations_limit /
+            this->max_num_snapshots;
+    }
+
     pagmo::population pop{prob, this->population_size, this->seed};
 
     this->update_best_individuals(pop);
