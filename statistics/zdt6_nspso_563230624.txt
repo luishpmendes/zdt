@@ -6,14 +6,14 @@ Iterations limit: 4294967295
 Maximum number of solutions: 250
 Maximum number of snapshots: 60
 Population size: 100
-Number of iterations: 141452
+Number of iterations: 187893
 Solutions obtained: 250
-Solving time: 600.003
+Solving time: 600.004
 Number of snapshots: 61
-Time between snapshots: 0
-Time when the last snapshot was taken: 600.002
-Number of iterations between the snapshots: 0
-Iteration when the last snapshot was taken: 141452
+Time between snapshots: 10
+Time when the last snapshot was taken: 600.004
+Number of iterations between the snapshots: 71582788
+Iteration when the last snapshot was taken: 187893
 Omega: 0.6
 C1: 2
 C2: 2
