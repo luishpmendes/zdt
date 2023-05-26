@@ -2,7 +2,7 @@
 
 zdts=(1 2 3 4 5 6)
 # solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
-solvers=(nspso)
+solvers=(nsbrkga)
 seeds=(355841728 682375620 147607335 606401489 935899510 503088981 563230624 997433667 836149872 834300085 589934169 307350956 577039631 302425715 975081369 845177606 959304182 197726465 166461764 999103007 391223490 873064556 433263959 181482329 780765822)
 versions=(best median)
 
@@ -433,7 +433,7 @@ done
 
 ffmpeg -y -r 5 -i ${path}/hypervolume_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/hypervolume_snapshots/hypervolume.mp4 &
 ffmpeg -y -r 5 -i ${path}/igd_plus_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/igd_plus_snapshots/igd_plus.mp4 &
-ffmpeg -y -r 5 -i ${path}/multiplicative_epsilon_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/multiplicative_epsilon_snapshots/multiplicative_epsilon.mp4 &
+# ffmpeg -y -r 5 -i ${path}/multiplicative_epsilon_snapshots/snapshot_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/multiplicative_epsilon_snapshots/multiplicative_epsilon.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/raincloud_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/raincloud.mp4 &
 ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/metrics_snapshots/scatter.mp4
 
@@ -441,7 +441,7 @@ wait
 
 rm ${path}/hypervolume_snapshots/snapshot_*.png &
 rm ${path}/igd_plus_snapshots/snapshot_*.png &
-rm ${path}/multiplicative_epsilon_snapshots/snapshot_*.png &
+# rm ${path}/multiplicative_epsilon_snapshots/snapshot_*.png &
 rm ${path}/metrics_snapshots/raincloud_*.png &
 rm ${path}/metrics_snapshots/scatter_*.png
 
