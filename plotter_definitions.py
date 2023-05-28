@@ -1,5 +1,6 @@
 zdts = [1, 2, 3, 4, 5, 6]
-solvers = ["nsga2", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
+# solvers = ["nsga2", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
+solvers = ["nsga2", "nspso", "moead", "nsbrkga"]
 solver_labels = {"nsga2": "NSGA-II",
                  "nspso": "NSPSO",
                  "moead": "MOEA/D-DE",

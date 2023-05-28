@@ -1,8 +1,7 @@
 #!/bin/bash
 
 zdts=(1 2 3 4 5 6)
-# solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
-solvers=(nsbrkga)
+solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
 seeds=(355841728 682375620 147607335 606401489 935899510 503088981 563230624 997433667 836149872 834300085 589934169 307350956 577039631 302425715 975081369 845177606 959304182 197726465 166461764 999103007 391223490 873064556 433263959 181482329 780765822)
 versions=(best median)
 
@@ -33,129 +32,127 @@ mkdir -p ${path}/multiplicative_epsilon_snapshots
 mkdir -p ${path}/metrics
 mkdir -p ${path}/metrics_snapshots
 
-commands=()
+# commands=()
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]="("
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]="("
+# done
 
-i=0
+# i=0
 
-for zdt in ${zdts[@]}
-do
-    for solver in ${solvers[@]}
-    do
-        for seed in ${seeds[@]}
-        do
-            command="${path}/bin/exec/${solver}_solver_exec "
-            command+="--zdt ${zdt} "
-            command+="--seed ${seed} "
-            command+="--time-limit ${time_limit} "
-            command+="--max-num-solutions ${max_num_solutions} "
-            command+="--max-num-snapshots ${max_num_snapshots} "
-            command+="--population-size ${population_size} "
-            command+="--statistics ${path}/statistics/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--solutions ${path}/solutions/zdt${zdt}_${solver}_${seed}_ "
-            command+="--pareto ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--best-solutions-snapshots ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
-            command+="--num-non-dominated-snapshots ${path}/num_non_dominated_snapshots/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--num-fronts-snapshots ${path}/num_fronts_snapshots/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--populations-snapshots ${path}/populations_snapshots/zdt${zdt}_${solver}_${seed}_ "
-            if [ $solver = "nspso" ]
-            then
-                command+="--memory "
-            fi
-            if [ $solver = "moead" ]
-            then
-                command+="--preserve-diversity "
-            fi
-            if [ $solver = "mhaco" ]
-            then
-                command+="--memory "
-            fi
-            if [ $solver = "nsbrkga" ]
-            then
-                command+="--num-elites-snapshots ${path}/num_elites_snapshots/zdt${zdt}_${solver}_${seed}.txt "
-            fi
-            if [ $i -lt $num_processes ]
-            then
-                commands[$i]+="$command"
-            else
-                commands[$((i%num_processes))]+=" && $command"
-            fi
-            i=$((i+1))
-        done
-    done
-done
+# for zdt in ${zdts[@]}
+# do
+#     for solver in ${solvers[@]}
+#     do
+#         for seed in ${seeds[@]}
+#         do
+#             command="${path}/bin/exec/${solver}_solver_exec "
+#             command+="--zdt ${zdt} "
+#             command+="--seed ${seed} "
+#             command+="--time-limit ${time_limit} "
+#             command+="--max-num-solutions ${max_num_solutions} "
+#             command+="--max-num-snapshots ${max_num_snapshots} "
+#             command+="--population-size ${population_size} "
+#             command+="--statistics ${path}/statistics/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--solutions ${path}/solutions/zdt${zdt}_${solver}_${seed}_ "
+#             command+="--pareto ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--best-solutions-snapshots ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
+#             command+="--num-non-dominated-snapshots ${path}/num_non_dominated_snapshots/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--num-fronts-snapshots ${path}/num_fronts_snapshots/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--populations-snapshots ${path}/populations_snapshots/zdt${zdt}_${solver}_${seed}_ "
+#             if [ $solver = "nspso" ]
+#             then
+#                 command+="--memory "
+#             fi
+#             if [ $solver = "moead" ]
+#             then
+#                 command+="--preserve-diversity "
+#             fi
+#             if [ $solver = "mhaco" ]
+#             then
+#                 command+="--memory "
+#             fi
+#             if [ $solver = "nsbrkga" ]
+#             then
+#                 command+="--num-elites-snapshots ${path}/num_elites_snapshots/zdt${zdt}_${solver}_${seed}.txt "
+#             fi
+#             if [ $i -lt $num_processes ]
+#             then
+#                 commands[$i]+="$command"
+#             else
+#                 commands[$((i%num_processes))]+=" && $command"
+#             fi
+#             i=$((i+1))
+#         done
+#     done
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]+=") &> ${path}/log_${i}.txt"
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]+=") &> ${path}/log_${i}.txt"
+# done
 
-final_command=""
+# final_command=""
 
-for ((i=0;i<num_processes;i++))
-do 
-    command=${commands[$i]}
-    final_command+="$command & "
-done
+# for ((i=0;i<num_processes;i++))
+# do 
+#     command=${commands[$i]}
+#     final_command+="$command & "
+# done
 
-eval $final_command
+# eval $final_command
 
-wait
+# wait
 
-solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
+# commands=()
 
-commands=()
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]="("
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]="("
-done
+# i=0
 
-i=0
+# for zdt in ${zdts[@]}
+# do
+#     command="${path}/bin/exec/reference_pareto_front_calculator_exec --max-num-solutions ${max_ref_solutions}"
+#     j=0;
+#     for solver in ${solvers[@]}
+#     do
+#         for seed in ${seeds[@]}
+#         do
+#             command+="--pareto-${j} ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
+#             command+="--reference-pareto ${path}/pareto/zdt${zdt}.txt "
+#             j=$((j+1))
+#         done
+#     done
+#     if [ $i -lt $num_processes ]
+#     then
+#         commands[$i]+="$command"
+#     else
+#         commands[$((i%num_processes))]+=" && $command"
+#     fi
+#     i=$((i+1))
+# done
 
-for zdt in ${zdts[@]}
-do
-    command="${path}/bin/exec/reference_pareto_front_calculator_exec --max-num-solutions ${max_ref_solutions}"
-    j=0;
-    for solver in ${solvers[@]}
-    do
-        for seed in ${seeds[@]}
-        do
-            command+="--pareto-${j} ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
-            command+="--reference-pareto ${path}/pareto/zdt${zdt}.txt "
-            j=$((j+1))
-        done
-    done
-    if [ $i -lt $num_processes ]
-    then
-        commands[$i]+="$command"
-    else
-        commands[$((i%num_processes))]+=" && $command"
-    fi
-    i=$((i+1))
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]+=") &>> ${path}/log_${i}.txt"
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]+=") &>> ${path}/log_${i}.txt"
-done
+# final_command=""
 
-final_command=""
+# for ((i=0;i<num_processes;i++))
+# do
+#     command=${commands[$i]}
+#     final_command+="$command & "
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    command=${commands[$i]}
-    final_command+="$command & "
-done
+# eval $final_command
 
-eval $final_command
-
-wait
+# wait
 
 commands=()
 
@@ -260,56 +257,56 @@ eval $final_command
 
 wait
 
-commands=()
+# commands=()
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]="("
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]="("
+# done
 
-i=0
+# i=0
 
-for zdt in ${zdts[@]}
-do
-    command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
-    command+="--reference-pareto ${path}/pareto/zdt${zdt}.txt "
-    j=0;
-    for solver in ${solvers[@]}
-    do
-        for seed in ${seeds[@]}
-        do
-            command+="--pareto-${j} ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
-            command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/zdt${zdt}_${solver}_${seed}.txt "
-            command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/zdt${zdt}_${solver}_${seed}.txt "
-            j=$((j+1))
-        done
-    done
-    if [ $i -lt $num_processes ]
-    then
-        commands[$i]+="$command"
-    else
-        commands[$((i%num_processes))]+=" && $command"
-    fi
-    i=$((i+1))
-done
+# for zdt in ${zdts[@]}
+# do
+#     command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
+#     command+="--reference-pareto ${path}/pareto/zdt${zdt}.txt "
+#     j=0;
+#     for solver in ${solvers[@]}
+#     do
+#         for seed in ${seeds[@]}
+#         do
+#             command+="--pareto-${j} ${path}/pareto/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/zdt${zdt}_${solver}_${seed}_ "
+#             command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/zdt${zdt}_${solver}_${seed}.txt "
+#             command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/zdt${zdt}_${solver}_${seed}.txt "
+#             j=$((j+1))
+#         done
+#     done
+#     if [ $i -lt $num_processes ]
+#     then
+#         commands[$i]+="$command"
+#     else
+#         commands[$((i%num_processes))]+=" && $command"
+#     fi
+#     i=$((i+1))
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]+=") &>> ${path}/log_${i}.txt"
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]+=") &>> ${path}/log_${i}.txt"
+# done
 
-final_command=""
+# final_command=""
 
-for ((i=0;i<num_processes;i++))
-do
-    command=${commands[$i]}
-    final_command+="$command & "
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     command=${commands[$i]}
+#     final_command+="$command & "
+# done
 
-eval $final_command
+# eval $final_command
 
-wait
+# wait
 
 commands=()
 

@@ -6,6 +6,8 @@ import os
 import statistics as stats
 from math import ceil, floor, sqrt
 from plotter_definitions import *
+from functools import partial
+import numpy as np
 
 dirname = os.path.dirname(__file__)
 
@@ -70,8 +72,11 @@ for i in range(len(solvers)):
         x.append(stats.mean(time_per_solver[solvers[i]][j]))
         y.append(stats.mean(hypervolume_per_solver[solvers[i]][j]))
     plt.plot(x, y, label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), color = colors[i], alpha = 0.80)
-plt.xlim(left = 0.0, right = max_time)
-plt.ylim(bottom = min_hypervolume, top = max_hypervolume)
+# plt.xlim(left = 0.0, right = max_time)
+# plt.ylim(bottom = min_hypervolume, top = max_hypervolume)
+plt.xscale("symlog")
+plt.yscale('function', functions=(partial(np.power, 10.0), np.log10))
+# plt.yticks([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
 plt.legend(loc = "best", fontsize = "large")
 filename = os.path.join(dirname, "hypervolume_snapshots/hypervolume_mean_snapshots.png")
 plt.savefig(filename, format = "png")

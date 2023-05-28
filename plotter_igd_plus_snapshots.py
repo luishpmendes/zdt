@@ -6,6 +6,8 @@ import os
 import statistics as stats
 from math import ceil, floor, sqrt
 from plotter_definitions import *
+from functools import partial
+import numpy as np
 
 dirname = os.path.dirname(__file__)
 
@@ -70,8 +72,10 @@ for i in range(len(solvers)):
         x.append(stats.mean(time_per_solver[solvers[i]][j]))
         y.append(stats.mean(igd_plus_per_solver[solvers[i]][j]))
     plt.plot(x, y, label = solver_labels[solvers[i]], marker = (i + 3, 2, 0), color = colors[i], alpha = 0.80)
-plt.xlim(left = 0.0, right = max_time)
-plt.ylim(bottom = min_igd_plus, top = max_igd_plus)
+    plt.xscale("log")
+    plt.yscale("log")
+# plt.xlim(left = 0.0, right = max_time)
+# plt.ylim(bottom = min_igd_plus, top = max_igd_plus)
 plt.legend(loc = "best", fontsize = "large")
 filename = os.path.join(dirname, "igd_plus_snapshots/igd_plus_mean_snapshots.png")
 plt.savefig(filename, format = "png")
