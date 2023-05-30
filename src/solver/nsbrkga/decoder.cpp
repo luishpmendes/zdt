@@ -14,7 +14,7 @@ std::vector<double> Decoder::decode(BRKGA::Chromosome & chromosome,
 
     if(this->zdt == 4) {
         for(unsigned i = 1; i < chromosome.size(); i++) {
-            dv[i] = 5 * (chromosome[i] - 0.5);
+            dv[i] = 10 * (chromosome[i] - 0.5);
         }
     }
 
