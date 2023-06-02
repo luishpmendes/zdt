@@ -1,19 +1,19 @@
 ZDT: 4
 Number of variables: 30
-Seed: 873064556
+Seed: 433263959
 Time limit: 600
 Iterations limit: 4294967295
 Maximum number of solutions: 250
 Maximum number of snapshots: 60
 Population size: 100
-Number of iterations: 668454
+Number of iterations: 484746
 Solutions obtained: 250
 Solving time: 600
 Number of snapshots: 61
 Time between snapshots: 10
 Time when the last snapshot was taken: 600
 Number of iterations between the snapshots: 71582788
-Iteration when the last snapshot was taken: 668454
+Iteration when the last snapshot was taken: 484746
 Minimum percentage of individuals to become the elite set: 0.1
 Maximum percentage of individuals to become the elite set: 0.5
 Mutation probability: 0.01
@@ -33,13 +33,13 @@ The intensity of the shaking: 10
 Interval at which the populations are reset: 500
 The intensity of the reset: 0.5
 Number of threads to be used during parallel decoding: 1
-Last update generation: 668454
-Last update time: 599.999
-Largest number of generations between improvements: 205
-Total path relink time: 0.162857
-Total path relink calls: 3342
+Last update generation: 484738
+Last update time: 599.995
+Largest number of generations between improvements: 202
+Total path relink time: 0.134815
+Total path relink calls: 2423
 Number of homogeneities: 0
 Improvements in the elite set: 0
 Best individual improvements: 0
-Total shakings calls: 2
+Total shakings calls: 4
 Total resets calls: 0
