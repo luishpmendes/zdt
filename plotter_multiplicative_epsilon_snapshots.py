@@ -60,7 +60,7 @@ for zdt in zdts:
                     csv_file.close()
 
 plt.figure()
-plt.title("MOTSP", fontsize = "xx-large")
+plt.title("ZDT", fontsize = "xx-large")
 plt.xlabel("Time (s)", fontsize = "x-large")
 plt.ylabel("Multiplicative Epsilon", fontsize = "x-large")
 for i in range(len(solvers)):
@@ -78,7 +78,7 @@ plt.savefig(filename, format = "png")
 plt.close()
 
 plt.figure()
-plt.title("MOTSP", fontsize = "xx-large")
+plt.title("ZDT", fontsize = "xx-large")
 plt.xlabel("Time (s)", fontsize = "x-large")
 plt.ylabel("Multiplicative Epsilon", fontsize = "x-large")
 for i in range(len(solvers)):
