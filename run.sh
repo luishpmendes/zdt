@@ -114,7 +114,8 @@ i=0
 
 for zdt in ${zdts[@]}
 do
-    command="${path}/bin/exec/reference_pareto_front_calculator_exec --max-num-solutions ${max_ref_solutions}"
+    command="${path}/bin/exec/reference_pareto_front_calculator_exec "
+    command+="--max-num-solutions ${max_ref_solutions} "
     j=0;
     for solver in ${solvers[@]}
     do

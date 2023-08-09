@@ -129,7 +129,7 @@ bool Solver::update_best_individuals(
             std::mt19937 & rng) {
     bool result = Solver::update_best_individuals(best_individuals,
                                                   new_individuals,
-                                                  Solver::senses);
+                                                  senses);
 
     if(best_individuals.size() > max_num_solutions) {
         BRKGA::Population::crowdingSort<std::vector<double>>(best_individuals,
