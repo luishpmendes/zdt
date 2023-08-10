@@ -51,21 +51,17 @@ bool Solver::dominates(const std::vector<double> & valueA,
         return false;
     }
 
-    // Checks if valueA is at least as good as valueB
-    for(unsigned i = 0; i < valueA.size(); i++) {
+    bool at_least_as_good = true, better = false;
+
+    for(std::size_t i = 0; i < valueA.size() && at_least_as_good; i++) {
         if(valueA[i] > valueB[i] + std::numeric_limits<double>::epsilon()) {
-            return false;
+            at_least_as_good = false;
+        } else if(valueA[i] < valueB[i] - std::numeric_limits<double>::epsilon()) {
+            better = true;
         }
     }
 
-    // Checks if valueA is better than valueB
-    for(unsigned i = 0; i < valueA.size(); i++) {
-        if(valueA[i] < valueB[i] - std::numeric_limits<double>::epsilon()) {
-            return true;
-        }
-    }
-
-    return false;
+    return at_least_as_good && better;
 }
 
 bool Solver::update_best_individuals(
@@ -156,7 +152,7 @@ bool Solver::update_best_individuals(const pagmo::population & pop) {
     std::vector<std::pair<std::vector<double>, std::vector<double>>>
         new_individuals(pop.size());
 
-    for(unsigned i = 0; i < pop.size(); i++) {
+    for(std::size_t i = 0; i < pop.size(); i++) {
         new_individuals[i] = std::make_pair(pop.get_f()[i], pop.get_x()[i]);
     }
 
@@ -171,14 +167,14 @@ void Solver::capture_snapshot(const pagmo::population & pop) {
                 time_snapshot,
                 std::vector<std::vector<double>>(
                     this->best_individuals.size())));
-    for(unsigned i = 0; i < this->best_individuals.size(); i++) {
+    for(std::size_t i = 0; i < this->best_individuals.size(); i++) {
         std::get<2>(this->best_solutions_snapshots.back())[i] =
             this->best_individuals[i].first;
     }
 
     this->current_individuals.resize(pop.size());
 
-    for(unsigned i = 0; i < pop.size(); i++) {
+    for(std::size_t i = 0; i < pop.size(); i++) {
         this->current_individuals[i] = std::make_pair(pop.get_f()[i],
                                                       pop.get_x()[i]);
     }
