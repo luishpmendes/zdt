@@ -114,7 +114,7 @@ if(arg_parser.option_exists("--min-elites-percentage")) {
 
         if(arg_parser.option_exists("--shake-intensity")) {
             solver.shake_intensity =
-                std::stoul(arg_parser.option_value("--shake-intensity"));
+                std::stod(arg_parser.option_value("--shake-intensity"));
         }
 
         if(arg_parser.option_exists("--reset-interval")) {

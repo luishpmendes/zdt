@@ -96,7 +96,7 @@ class NSBRKGA_Solver : public Solver {
     /********************************
      * The intensity of the shaking.
      ********************************/
-    unsigned shake_intensity = 10;
+    double shake_intensity = 0.5;
 
     /******************************************************************
      * Interval at which the populations are reset (0 means no reset).
