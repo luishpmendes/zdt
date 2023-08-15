@@ -37,7 +37,7 @@ int main (int argc, char * argv[]) {
                 std::stoul(arg_parser.option_value("--population-size"));
         }
 
-if(arg_parser.option_exists("--min-elites-percentage")) {
+        if(arg_parser.option_exists("--min-elites-percentage")) {
             solver.min_elites_percentage =
                 std::stod(arg_parser.option_value("--min-elites-percentage"));
         }
@@ -80,6 +80,17 @@ if(arg_parser.option_exists("--min-elites-percentage")) {
         if(arg_parser.option_exists("--num-populations")) {
             solver.num_populations =
                 std::stoul(arg_parser.option_value("--num-populations"));
+        }
+
+        if(arg_parser.option_exists("--exchange-interval")) {
+            solver.exchange_interval =
+                std::stoul(arg_parser.option_value("--exchange-interval"));
+        }
+
+        if(arg_parser.option_exists("--num-exchange-individuals")) {
+            solver.num_exchange_individuals =
+                std::stoul(arg_parser.option_value(
+                    "--num-exchange-individuals"));
         }
 
         if(arg_parser.option_exists("--pr-number-pairs")) {
@@ -349,15 +360,17 @@ if(arg_parser.option_exists("--min-elites-percentage")) {
                     
                     ofs << iteration << " "
                         << time << std::endl;
-                    
-                    for(unsigned j = 0; j < population.front().size(); j++) {
-                        for(unsigned k = 0;
-                            k < population.front()[j].size() - 1;
-                            k++) {
-                            ofs << population.front()[j][k] << " ";
-                        }
 
-                        ofs << population.front()[j].back() << std::endl;
+                    for (unsigned j = 0; j < population.size(); j++) {
+                        for(unsigned k = 0; k < population[j].size(); k++) {
+                            for(unsigned l = 0;
+                                l < population[j][k].size() - 1;
+                                l++) {
+                                ofs << population[j][k][l] << " ";
+                            }
+
+                            ofs << population[j][k].back() << std::endl;
+                        }
                     }
 
                     if(ofs.eof() || ofs.fail() || ofs.bad()) {
@@ -432,6 +445,8 @@ if(arg_parser.option_exists("--min-elites-percentage")) {
                   << "--bias-type <bias_type> "
                   << "--diversity-type <diversity_type> "
                   << "--num-populations <num_populations> "
+                  << "--exchange-interval <exchange_interval> "
+                  << "--num-exchange-individuals <num_exchange_individuals> "
                   << "--pr-number-pairs <pr_number_pairs> "
                   << "--pr-min-dist <pr_min_dist> "
                   << "--pr-selection <pr_selection> "
