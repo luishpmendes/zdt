@@ -25,18 +25,15 @@ void NSPSO_Solver::solve() {
                                        this->memory,
                                        this->seed)};
 
-    if(this->max_num_snapshots > 0) {
-        this->time_between_snapshots = this->time_limit /
-            this->max_num_snapshots;
-        this->iterations_between_snapshots = this->iterations_limit /
-            this->max_num_snapshots;
-    }
-
     pagmo::population pop{prob, this->population_size, this->seed};
 
     this->update_best_individuals(pop);
 
     if(this->max_num_snapshots > 0) {
+        this->time_between_snapshots = this->time_limit / 
+                (std::pow(2.0, this->max_num_snapshots) - 1.0);
+        this->iterations_between_snapshots = this->iterations_limit / 
+                (std::pow(2, this->max_num_snapshots) - 1);
         this->capture_snapshot(pop);
     }
 
@@ -52,6 +49,8 @@ void NSPSO_Solver::solve() {
            this->num_iterations - this->iteration_last_snapshot >=
            this->iterations_between_snapshots)) {
             this->capture_snapshot(pop);
+            this->time_between_snapshots *= 2.0;
+            this->iterations_between_snapshots *= 2;
         }
     }
 
