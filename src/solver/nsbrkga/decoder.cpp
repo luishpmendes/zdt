@@ -8,7 +8,7 @@ Decoder::Decoder(unsigned zdt, unsigned m) : zdt(zdt), m(m) {
     this->prob = pagmo::zdt(this->zdt, this->m);
 }
 
-std::vector<double> Decoder::decode(BRKGA::Chromosome & chromosome, 
+std::vector<double> Decoder::decode(NSBRKGA::Chromosome & chromosome, 
                                     bool /* not used */) {
     pagmo::vector_double dv(chromosome);
 

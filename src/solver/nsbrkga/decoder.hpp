@@ -16,7 +16,7 @@ class Decoder {
 
     Decoder(unsigned zdt, unsigned m);
 
-    std::vector<double> decode(BRKGA::Chromosome & chromosome, bool rewrite);
+    std::vector<double> decode(NSBRKGA::Chromosome & chromosome, bool rewrite);
 };
 
 }
