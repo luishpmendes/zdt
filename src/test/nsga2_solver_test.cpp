@@ -11,7 +11,7 @@ int main() {
         solver.iterations_limit = 100;
         solver.max_num_solutions = 64;
         solver.population_size = 32;
-        solver.max_num_snapshots = 32;
+        solver.max_num_snapshots = 16;
 
         assert((solver.seed = 2351389233));
         assert(fabs(solver.time_limit - 5.0) <
@@ -19,7 +19,7 @@ int main() {
         assert(solver.iterations_limit == 100);
         assert(solver.max_num_solutions == 64);
         assert(solver.population_size == 32);
-        assert(solver.max_num_snapshots == 32);
+        assert(solver.max_num_snapshots == 16);
         assert(fabs(solver.crossover_probability - 0.95) <
                 std::numeric_limits<double>::epsilon());
         assert(fabs(solver.crossover_distribution - 10.00) <
@@ -39,8 +39,7 @@ int main() {
         assert(solver.best_individuals.size() > 0);
         assert(solver.best_individuals.size() <= solver.max_num_solutions);
 
-        assert(solver.num_snapshots > 0);
-        assert(solver.num_snapshots <= solver.max_num_snapshots + 1);
+        assert(solver.num_snapshots == solver.max_num_snapshots);
 
         assert(solver.best_solutions_snapshots.size() == solver.num_snapshots);
         assert(solver.num_non_dominated_snapshots.size() == solver.num_snapshots);
@@ -190,6 +189,8 @@ int main() {
             0) / std::get<2>(solver.num_fronts_snapshots.back()).size()
                 << ")" << std::endl;
     }
+
+    std::cout << std::endl << "NSGA2 Solver Test PASSED" << std::endl;
 
     return 0;
 }
